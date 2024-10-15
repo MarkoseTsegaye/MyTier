@@ -4,6 +4,7 @@ import Login from "./pages/Login"
 import ProtectedRoute from "./components/ProtectedRoute"
 import Home from "./pages/Home"
 import Landing from "./pages/Landing"
+import Collection from "./pages/Collection"
 
 
 function Logout() {
@@ -20,7 +21,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/landing" element={<Landing />} />
+      <Route path="/collection" element={<Collection />} />
+        <Route path="/" element={<Landing />} />
         <Route
           path="/home"
           element={
