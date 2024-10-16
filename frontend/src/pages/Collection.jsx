@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar'
 
 const Collection = () => {
   return (
-    <div className='w-screen h-screen bg-[#1E1E1E]'>
+    <div className='fixed top-0 -z-10 h-full w-full bg-[#1E1E1E]'>
         <Navbar />
     </div>
   )

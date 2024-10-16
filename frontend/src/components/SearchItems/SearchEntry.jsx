@@ -6,27 +6,23 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import { Add } from '@mui/icons-material';
+import { Button } from '@mui/material';
+
 
 const SearchEntry = ({data}) => {
   const theme = useTheme();
-   const searchEntry = (
-        <React.Fragment>
-          <Card className="w-1/2" sx={{width: 200,height:50}}>
-            <CardContent className='flex flex-row'>
-                <h1>{data.title}</h1>
-                <img className="object-cover w-full h-full" src={data.imageUrl} width={10} height={10} />
-                <p>{data.genreTag}</p>
-            </CardContent>
-            
-            </Card>
-            
-        </React.Fragment>
-
-    )
+   
   return (
     <div>
     
-    <Card sx={{ display: 'flex',  width:500 }}>
+    <Card sx={{ display: 'flex',  width: {
+              xs: '300px',  // 100% width on extra-small screens
+              sm: '400px',   // 75% width on small screens
+              md: '500px',   // 50% width on medium screens
+              lg: '600px',   // 40% width on large screens
+              xl: '800px',   // 30% width on extra-large screens
+            } , borderRadius:0, borderBottom: '1px solid black', paddingLeft:.5, paddingBottom:.5, paddingTop:.5}}>
           <Box sx={{ display: 'flex', flexDirection: 'row' }}>
           <CardMedia
             component="img"
@@ -35,19 +31,30 @@ const SearchEntry = ({data}) => {
             alt="NSFW"
           />
             <CardContent sx={{ flex: '1 0 auto', height:50, flexDirection:'column'}}>
-              <Typography component="div" variant="h7">
-                {data.title}
+              <Typography component="div" variant="h8" sx={{ fontSize: {
+                xs: 14,
+                md: 18,
+              }}}>
+              {data.title.length > 32 ? data.title.slice(0,31) + "...": data.title}
               </Typography>
               
-            </CardContent>
-            <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-            <Typography
-                variant="subtitle1"
+              <Typography
+                variant="h2"
                 component="div"
+                fontSize={10}
                 sx={{ color: 'text.secondary' }}
               >
                 {data.genreTag === 'Hentai' ? 'NSFW' : data.genreTag}
               </Typography>
+            </CardContent>
+            <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+            <Button
+              variant="contained"
+              startIcon={<Add />}
+              sx={{ backgroundColor: '#007bff', '&:hover': { backgroundColor: '#0056b3' } }}
+    >
+  sx
+    </Button>
 
             </Box>
           </Box>
