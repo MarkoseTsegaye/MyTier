@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import { Box, Button, Input, ClickAwayListener, Select, MenuItem, FormControl, InputBase } from '@mui/material';
-import SearchEntry from './SearchItems/SearchEntry';
+import api from "../api";
 
+import SearchEntry from './SearchItems/SearchEntry';
 const Navbar = () => {
   const [searchItem, setSearchItem] = useState('');
   const [animes, setAnimes] = useState([]);
+  const [lengthOfList, setLengthOfList] = useState(0);
   let debounceTimeout; 
 
   const selectionChoices = ['anime', 'book', 'show', 'movie', 'game'];
   const [selection, setSelection] = useState('anime');
+
+  const handleGet = (searchTerm) => {
+    if (selection === "anime"){
+      getAnimes(searchTerm)
+    }
+    else if (selection === "game"){
+      getGames(searchTerm)
+    }
+  };
   const handleSelect = (e) => {
     setSelection(e.target.value);
   };
@@ -30,6 +41,7 @@ const Navbar = () => {
   };
 
   const getAnimes = (query) => {
+    
     if (!query) {
       setAnimes([]); 
       return;
@@ -64,12 +76,43 @@ const Navbar = () => {
         }));
 
         setAnimes(animeInfo);
+        
         console.log(animeInfo);
+        console.log(results.length)
+        setLengthOfList(results.length)
       })
       .catch((error) => {
         console.error('Error:', error);
       });
   };
+  const getGames = (query) => {
+  // Get the CSRF token from the cookies
+  const csrfToken = document.cookie.split(';').find((cookie) => cookie.trim().startsWith('csrftoken='));
+  const csrfValue = csrfToken ? csrfToken.split('=')[1] : '';
+
+  // Construct the request payload
+  const bodyData = { query };
+//FIX CORS HERE CONSIDER USING CORS ANYWHERE PLEASE MARK PLEASE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  handleClickIn();
+  console.log("Sending request to get game data");
+
+  fetch("http://localhost:8000/api/api/igdb-info/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": csrfValue, // Include CSRF token here
+      "credentials": 'include'
+
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data); // Handle the response from the backend
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+};
 
   return (
     <div className="w-screen bg-[#333333] flex h-20">
@@ -146,7 +189,7 @@ const Navbar = () => {
           <ClickAwayListener onClickAway={handleClickAway}>
             <Button
               variant="contained"
-              onClick={() => getAnimes(searchItem)} 
+              onClick={() => handleGet(searchItem)} 
               sx={{
                 width: '20%',
                 height: '100%',
@@ -164,7 +207,7 @@ const Navbar = () => {
         </Box>
         <div className="max-h-[300px] sm:max-h-[450px] lg:max-h-[550px] max-h-[600px] overflow-y-auto">
           {focused ? animes.map((anime) => (
-            <SearchEntry key={anime.id} data={anime} />
+            <SearchEntry key={anime.id} data={anime} length={lengthOfList} />
           )) : null}
         </div>
       </div>

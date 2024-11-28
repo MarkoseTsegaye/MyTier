@@ -10,12 +10,13 @@ import { Add } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
 
-const SearchEntry = ({data}) => {
+const SearchEntry = ({data, length}) => {
   const theme = useTheme();
-   
+  
   return (
     <div>
-    
+      {console.log(length + 'hi')}
+    {length > 0 ? 
     <Card sx={{ display: 'flex',  width: {
               xs: '300px',  // 100% width on extra-small screens
               sm: '400px',   // 75% width on small screens
@@ -30,12 +31,18 @@ const SearchEntry = ({data}) => {
             image={data.genreTag ==="Hentai" ? null:data.imageUrl}
             alt="NSFW"
           />
-            <CardContent sx={{ flex: '1 0 auto', height:50, flexDirection:'column'}}>
+            <CardContent sx={{ flex: '1 0 auto', height:50, flexDirection:'column',  width: {
+              xs: '170px',  // 100% width on extra-small screens
+              sm: '270px',   // 75% width on small screens
+              md: '370px',   // 50% width on medium screens
+              lg: '470px',   // 40% width on large screens
+              xl: '620px',   // 30% width on extra-large screens
+            } }}>
               <Typography component="div" variant="h8" sx={{ fontSize: {
                 xs: 14,
                 md: 18,
               }}}>
-              {data.title.length > 32 ? data.title.slice(0,31) + "...": data.title}
+              {data.title.length > 40 ? data.title.slice(0,40) + "...": data.title}
               </Typography>
               
               <Typography
@@ -50,16 +57,22 @@ const SearchEntry = ({data}) => {
             <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
             <Button
               variant="contained"
-              startIcon={<Add />}
-              sx={{ backgroundColor: '#007bff', '&:hover': { backgroundColor: '#0056b3' } }}
+              sx={{ backgroundColor: '#007bff', '&:hover': { backgroundColor: '#0056b3' }, justifyContent: 'center'}}
     >
-  sx
+  Add
     </Button>
 
             </Box>
           </Box>
         
-          </Card>
+          </Card> : <Card sx={{ display: 'flex',  width: {
+              xs: '300px',  // 100% width on extra-small screens
+              sm: '400px',   // 75% width on small screens
+              md: '500px',   // 50% width on medium screens
+              lg: '600px',   // 40% width on large screens
+              xl: '800px',   // 30% width on extra-large screens
+            } , borderRadius:0, borderBottom: '1px solid black', paddingLeft:.5, paddingBottom:.5, paddingTop:.5}}>
+          <Box sx={{ display: 'flex', flexDirection: 'row' }}></Box> </Card>}
     </div>
   )
 }
