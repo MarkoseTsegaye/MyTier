@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, Input, ClickAwayListener, Select, MenuItem, FormControl, InputBase } from '@mui/material';
 import api from "../api";
 
+
 import SearchEntry from './SearchItems/SearchEntry';
 const Navbar = () => {
   const [searchItem, setSearchItem] = useState('');
@@ -15,6 +16,7 @@ const Navbar = () => {
   const handleGet = (searchTerm) => {
     if (selection === "anime"){
       getAnimes(searchTerm)
+
     }
     else if (selection === "game"){
       getGames(searchTerm)
@@ -243,7 +245,7 @@ const Navbar = () => {
     items.length > 0 ? (
         items.map((item, index) => <SearchEntry key={index} data={item} length={lengthOfList} />)
     ) : (
-        <p>No results found.</p>
+      <SearchEntry data={{title: "f", type:"anime"}} length={1} />
     )
 ) : null}
         </div>
