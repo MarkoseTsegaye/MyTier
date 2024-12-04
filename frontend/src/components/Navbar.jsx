@@ -5,7 +5,7 @@ import api from "../api";
 import SearchEntry from './SearchItems/SearchEntry';
 const Navbar = () => {
   const [searchItem, setSearchItem] = useState('');
-  const [animes, setAnimes] = useState([]);
+  const [items, setItems] = useState([]);
   const [lengthOfList, setLengthOfList] = useState(0);
   let debounceTimeout; 
 
@@ -18,6 +18,9 @@ const Navbar = () => {
     }
     else if (selection === "game"){
       getGames(searchTerm)
+    }
+    else if (selection === "book"){
+      getBooks(searchTerm)
     }
   };
   const handleSelect = (e) => {
@@ -43,7 +46,7 @@ const Navbar = () => {
   const getAnimes = (query) => {
     
     if (!query) {
-      setAnimes([]); 
+      setItems([]); 
       return;
     }
     handleClickIn();
@@ -73,12 +76,11 @@ const Navbar = () => {
           imageUrl: result.images.jpg?.image_url || 'No image available',
           studio: result.studios[0]?.name || 'No studio available',
           genreTag: result.genres[0]?.name || 'No genre available',
+          type: "anime"
         }));
 
-        setAnimes(animeInfo);
+        setItems(animeInfo);
         
-        console.log(animeInfo);
-        console.log(results.length)
         setLengthOfList(results.length)
       })
       .catch((error) => {
@@ -94,7 +96,6 @@ const Navbar = () => {
   const bodyData = { query };
 //FIX CORS HERE CONSIDER USING CORS ANYWHERE PLEASE MARK PLEASE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   handleClickIn();
-  console.log("Sending request to get game data");
 
   fetch("http://localhost:8000/api/api/igdb-info/", {
     method: "POST",
@@ -107,13 +108,40 @@ const Navbar = () => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data); // Handle the response from the backend
     })
     .catch((error) => {
       console.error("Error:", error);
     });
 };
 
+  const getBooks = (query) => {
+    const url = new URL('https://openlibrary.org/search.json');
+    handleClickIn()
+    url.searchParams.append('title', query); 
+    url.searchParams.append('limit', 15)
+    fetch(url, {
+      method: "GET",
+      
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const results = data.docs;
+        const bookInfo = results.map((result) => ({
+          title: result.title || 'No name available',
+          imageUrl: result.cover_i ? `https://covers.openlibrary.org/b/id/${result.cover_i}-M.jpg` : 'No image available',
+          author: result.author_name?.[0] || 'No author available',
+          type: "book"
+        }));
+        
+        setItems(bookInfo);
+        setLengthOfList(results.length)
+
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+      };
+  
   return (
     <div className="w-screen bg-[#333333] flex h-20">
       <div className="place-self-center ml-8 sm:ml-14 md:ml-20 lg:ml-30 xl:ml-40 h-1/2">
@@ -163,6 +191,8 @@ const Navbar = () => {
                     <MenuItem sx={{borderRadius:0}} value={'game'}>Game</MenuItem>
                     <MenuItem sx={{borderRadius:0}} value={'show'}>Show</MenuItem>
                     <MenuItem sx={{borderRadius:0}} value={'movie'}>Movie</MenuItem>
+                    <MenuItem sx={{borderRadius:0}} value={'book'}>Book</MenuItem>
+
                 </Select>
               </FormControl>
 
@@ -206,9 +236,16 @@ const Navbar = () => {
           </ClickAwayListener>
         </Box>
         <div className="max-h-[300px] sm:max-h-[450px] lg:max-h-[550px] max-h-[600px] overflow-y-auto">
-          {focused ? animes.map((anime) => (
-            <SearchEntry key={anime.id} data={anime} length={lengthOfList} />
-          )) : null}
+          {/* {focused ? items.map((item) => (
+            <SearchEntry  data={item} length={lengthOfList} />
+          )) : null} */}
+          {focused ? (
+    items.length > 0 ? (
+        items.map((item, index) => <SearchEntry key={index} data={item} length={lengthOfList} />)
+    ) : (
+        <p>No results found.</p>
+    )
+) : null}
         </div>
       </div>
     </div>

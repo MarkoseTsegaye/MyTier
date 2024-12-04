@@ -12,10 +12,29 @@ import { Button } from '@mui/material';
 
 const SearchEntry = ({data, length}) => {
   const theme = useTheme();
+
+  let info = {}
   
+  if (data.type === "anime"
+  ){
+    info = {
+      "title":data.title,
+      "genre":data.genreTag,
+      "studio":data.studio,
+      "image":data.imageUrl
+    }
+  }
+  if (data.type === "book"
+  ){
+
+    info = {
+      "title":data.title,
+      "genre":data.author,
+      "image":data.imageUrl
+    }
+  }
   return (
     <div>
-      {console.log(length + 'hi')}
     {length > 0 ? 
     <Card sx={{ display: 'flex',  width: {
               xs: '300px',  // 100% width on extra-small screens
@@ -28,8 +47,9 @@ const SearchEntry = ({data, length}) => {
           <CardMedia
             component="img"
             sx={{ width: 50, height:50, object:'fill'}}
-            image={data.genreTag ==="Hentai" ? null:data.imageUrl}
-            alt="NSFW"
+            
+            image={info.genre ==="Hentai" ? null:info.image}
+            alt="No Cover"
           />
             <CardContent sx={{ flex: '1 0 auto', height:50, flexDirection:'column',  width: {
               xs: '170px',  // 100% width on extra-small screens
@@ -42,7 +62,7 @@ const SearchEntry = ({data, length}) => {
                 xs: 14,
                 md: 18,
               }}}>
-              {data.title.length > 40 ? data.title.slice(0,40) + "...": data.title}
+              {info.title.length > 40 ? info.title.slice(0,40) + "...": info.title}
               </Typography>
               
               <Typography
@@ -51,7 +71,7 @@ const SearchEntry = ({data, length}) => {
                 fontSize={10}
                 sx={{ color: 'text.secondary' }}
               >
-                {data.genreTag === 'Hentai' ? 'NSFW' : data.genreTag}
+                {info.genre === 'Hentai' ? 'NSFW' : info.genre}
               </Typography>
             </CardContent>
             <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
