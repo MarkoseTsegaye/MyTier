@@ -20,7 +20,7 @@ class UserSerializer(serializers.ModelSerializer):
 class EntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Entry
-        fields = ['id', 'title', 'description', 'author', 'type']
+        fields = ['id', 'title', 'picture', 'author' ,'type']
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, Input, ClickAwayListener, Select, MenuItem, FormControl, InputBase } from '@mui/material';
 import api from "../api";
-
+// #import API next
 
 import SearchEntry from './SearchItems/SearchEntry';
 const Navbar = () => {
@@ -257,7 +257,6 @@ const Navbar = () => {
             }}
           />
           
-          <ClickAwayListener onClickAway={handleClickAway}>
             <Button
               variant="contained"
               onClick={() => handleGet(searchItem)} 
@@ -274,15 +273,19 @@ const Navbar = () => {
             >
               Search
             </Button>
-          </ClickAwayListener>
         </Box>
+
         <div className="max-h-[300px] sm:max-h-[450px] lg:max-h-[550px] max-h-[600px] overflow-y-auto">
           {/* {focused ? items.map((item) => (
             <SearchEntry  data={item} length={lengthOfList} />
           )) : null} */}
           {focused ? (
     items.length > 0 ? (
-        items.map((item, index) => <SearchEntry key={index} data={item} length={lengthOfList} />)
+        items.map((item, index) => 
+          <ClickAwayListener onClickAway={handleClickAway}>
+
+        <SearchEntry key={index} data={item} length={lengthOfList} />
+        </ClickAwayListener>)
     ) : (
       <SearchEntry data={{title: "f", type:"anime"}} length={1} />
     )

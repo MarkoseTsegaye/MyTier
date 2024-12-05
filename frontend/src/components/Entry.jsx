@@ -1,33 +1,65 @@
-import React from 'react'
+import React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-const Entry = (props) => {
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
-    const entry = (
-        <React.Fragment>
-          <Card sx={{width: 300,height:300}}>
-            <CardContent>
-                {props.title}
-            </CardContent>
-            <CardContent>
-                {props.description}
-            </CardContent>
-            <CardContent>
-                {props.author}
-            </CardContent>
-            <CardContent>
-                {props.type}
-            </CardContent>
-            </Card>
-            
-        </React.Fragment>
-    )
+const Entry = ({ props }) => {
   return (
-    <div>
-    <Card variant="outlined">{entry}</Card>
-    </div>
-  )
-}
+    <Card
+      sx={{
+        maxWidth: 345,
+        margin: 'auto',
+        boxShadow: 3,
+        borderRadius: 2,
+        overflow: 'hidden',
+        transition: 'transform 0.2s',
+        ':hover': {
+          transform: 'scale(1.05)',
+        },
+      }}
+    >
+      {props.picture && (
+        <CardMedia
+          component="img"
+          alt={props.title}
+          height="200"
+          image={props.picture}
+          sx={{
+            objectFit: 'cover',
+          }}
+        />
+      )}
+      <CardContent>
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          sx={{
+            fontWeight: 'bold',
+            textAlign: 'center',
+          }}
+        >
+          {props.title || 'Untitled'}
+        </Typography>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ textAlign: 'center' }}
+        >
+          Author: {props.author || 'Unknown'}
+        </Typography>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ textAlign: 'center', mt: 1 }}
+        >
+          Type: {props.type || 'N/A'}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
+};
 
-export default Entry
+export default Entry;

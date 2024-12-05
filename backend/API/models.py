@@ -14,7 +14,7 @@ class Entry(models.Model):
         ('ANIME', 'Anime')
     ]
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=2000)
+    picture = models.CharField(max_length=2000)
     author = models.CharField(max_length=40)
     type = models.CharField(choices=TYPE_CHOICES, max_length=100, default="MOVIE")
     #rank = models.IntegerField(default=None, blank=True)

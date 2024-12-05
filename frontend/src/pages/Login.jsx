@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
+import React from 'react';
 
 function Login({ route, method }) {
     const [username, setUsername] = useState("");
@@ -20,13 +21,12 @@ function Login({ route, method }) {
             
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
                 localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-                navigate("/home")
+                navigate("/collection")
                 
             
         } catch (error) {
             alert(error)
         } finally {
-            setLoading(false)
             console.log("Login Success")
         }
     };

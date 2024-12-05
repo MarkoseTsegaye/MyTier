@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+from corsheaders.defaults import default_headers
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -144,12 +146,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',  # Your frontend development URL
+    "http://localhost:5173",  # Your frontend URL
 ]
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = [
-    'content-type',
-    'X-CSRFToken',  # Allow this header for CSRF token
-]
+
 CORS_PREFLIGHT_MAX_AGE = 86400  # Allow preflight cache for one day
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'Authorization',
+]

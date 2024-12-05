@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -8,11 +8,17 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { Add } from '@mui/icons-material';
 import { Button } from '@mui/material';
-
+import api from '.../api';
 
 const SearchEntry = ({data, length}) => {
   const theme = useTheme();
+  const title = (data.title)
+  const author = (data.studio)
+  const picture = (data.imageUrl)
+  const type = (data.type)
 
+ 
+  
   let info = {}
   
   if (data.type === "anime"
@@ -20,16 +26,17 @@ const SearchEntry = ({data, length}) => {
     info = {
       "title":data.title,
       "genre":data.genreTag,
-      "studio":data.studio,
+      "author":data.studio,
       "image":data.imageUrl
     }
+    
   }
   if (data.type === "book"
   ){
 
     info = {
       "title":data.title,
-      "genre":data.author,
+      "author":data.author,
       "image":data.imageUrl
     }
   }
@@ -38,7 +45,7 @@ const SearchEntry = ({data, length}) => {
 
     info = {
       "title":data.title,
-      "developer":data.developer,
+      "author":data.developer,
       "image":data.imageUrl,
       "genre":data.genre,
 
@@ -50,8 +57,26 @@ const SearchEntry = ({data, length}) => {
     info = {
       "title":data.title,
       "image":data.imageUrl,
+      
+
 
     }
+  }
+  
+
+  const addToCollection = (e) => {
+    
+    e.preventDefault();
+    console.log(title + author + picture + type)
+
+
+    api.post("/api/entry/", {title,picture,author,type})
+    .then((res) => res.data)
+    .then((data) => {
+        // Map the data and set it to the options state
+        console.log(data)
+    })
+    .catch((err) => alert(err));
   }
   return (
     <div>
@@ -98,7 +123,7 @@ const SearchEntry = ({data, length}) => {
             <Button
               variant="contained"
               sx={{ backgroundColor: '#007bff', '&:hover': { backgroundColor: '#0056b3' }, justifyContent: 'center'}}
-    >
+    onClick={addToCollection}>
   Add
     </Button>
 
