@@ -10,7 +10,6 @@ const Navbar = () => {
   const [lengthOfList, setLengthOfList] = useState(0);
   let debounceTimeout; 
 
-  const selectionChoices = ['anime', 'book', 'show', 'movie', 'game'];
   const [selection, setSelection] = useState('anime');
 
   const handleGet = (searchTerm) => {
@@ -23,6 +22,9 @@ const Navbar = () => {
     }
     else if (selection === "book"){
       getBooks(searchTerm)
+    }
+    else if (selection === "tv"){
+      getTV(searchTerm)
     }
   };
   const handleSelect = (e) => {
@@ -90,26 +92,30 @@ const Navbar = () => {
       });
   };
   const getGames = (query) => {
-  // Get the CSRF token from the cookies
-  const csrfToken = document.cookie.split(';').find((cookie) => cookie.trim().startsWith('csrftoken='));
-  const csrfValue = csrfToken ? csrfToken.split('=')[1] : '';
-
-  // Construct the request payload
-  const bodyData = { query };
-//FIX CORS HERE CONSIDER USING CORS ANYWHERE PLEASE MARK PLEASE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  
   handleClickIn();
+  const url = new URL('https://api.rawg.io/api/games');
+  url.searchParams.append('search', query); 
+  url.searchParams.append('ordering', "-added"); 
 
-  fetch("http://localhost:8000/api/api/igdb-info/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRFToken": csrfValue, // Include CSRF token here
-      "credentials": 'include'
+  url.searchParams.append('key', "a9cb9d71fcf34ceea1b944ed4e7301e7"); 
 
-    },
+  fetch(url, {
+    method: "GET",
   })
     .then((response) => response.json())
     .then((data) => {
+      const results = data.results;
+      const gameInfo = results.map((result) => ({
+        title: result.name || 'No name available',
+        imageUrl: result.background_image || 'No image available',
+        genre: result.genres[0]?.name || 'No genre available',
+        type: "game"
+      }));
+      
+      setItems(gameInfo);
+      console.log(gameInfo);
+      setLengthOfList(results.length)
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -143,6 +149,40 @@ const Navbar = () => {
         console.error("Error:", error);
       });
       };
+    
+  const getTV = (query) => {
+    handleClickIn()
+    const url = new URL('http://www.omdbapi.com')
+
+    url.searchParams.append('s', query); 
+    url.searchParams.append('page ', '1'); 
+
+    url.searchParams.append('apikey', "2d989794")
+
+    fetch(url, {
+      method: "GET",
+      
+    })
+     .then((response) => response.json())
+     .then((data) => {
+      console.log(data)
+        const results = data.Search;
+        const tvInfo = results.map((result) => ({
+          title: result.Title || 'No name available',
+          imageUrl: result.Poster || 'No image available',
+          type: "tv"
+        }));
+        
+        setItems(tvInfo);
+        console.log(tvInfo)
+        setLengthOfList(results.length)
+      })
+     .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+;
+  
   
   return (
     <div className="w-screen bg-[#333333] flex h-20">
@@ -191,14 +231,13 @@ const Navbar = () => {
             >
                     <MenuItem sx={{borderRadius:0}} value={'anime'}>Anime</MenuItem>
                     <MenuItem sx={{borderRadius:0}} value={'game'}>Game</MenuItem>
-                    <MenuItem sx={{borderRadius:0}} value={'show'}>Show</MenuItem>
-                    <MenuItem sx={{borderRadius:0}} value={'movie'}>Movie</MenuItem>
+                    <MenuItem sx={{borderRadius:0}} value={'tv'}>TV</MenuItem>
                     <MenuItem sx={{borderRadius:0}} value={'book'}>Book</MenuItem>
 
                 </Select>
               </FormControl>
 
-
+          <div></div>
           <InputBase
             value={searchItem}
             onChange={handleInputChange}

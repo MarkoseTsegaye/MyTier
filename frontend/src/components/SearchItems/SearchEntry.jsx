@@ -33,6 +33,26 @@ const SearchEntry = ({data, length}) => {
       "image":data.imageUrl
     }
   }
+  if (data.type === "game"
+  ){
+
+    info = {
+      "title":data.title,
+      "developer":data.developer,
+      "image":data.imageUrl,
+      "genre":data.genre,
+
+    }
+  }
+  if (data.type === "tv"
+  ){
+
+    info = {
+      "title":data.title,
+      "image":data.imageUrl,
+
+    }
+  }
   return (
     <div>
     {length > 0 ? 
