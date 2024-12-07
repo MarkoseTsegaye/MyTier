@@ -7,11 +7,10 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Entry(models.Model):
     TYPE_CHOICES = [
-        ('MOVIE', 'Movie'),
-        ('BOOK', 'Book'),
-        ('TV SHOW', 'TV Show'),
-        ('GAME', 'Game'),
-        ('ANIME', 'Anime')
+        ('movie', 'Movie'),
+        ('book', 'Book'),
+        ('game', 'Game'),
+        ('anime', 'Anime')
     ]
     title = models.CharField(max_length=100)
     picture = models.CharField(max_length=2000)

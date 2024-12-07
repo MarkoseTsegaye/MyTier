@@ -21,13 +21,17 @@ const Collection = () => {
     .catch((err) => alert(err));
   }
   return (
-    <div className='fixed top-0 -z-10 h-full w-full bg-[#1E1E1E]'>
+    <div className='fixed top-0 -z-10 h-full w-full bg-[#1E1E1E] overflow-y-scroll'>
         <Navbar />
-        <div>
+        <div className='w-full flex'>
+          <div className='w-1/4 bg-black'></div>
+        <div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-rows-5 md:gap-4 xl:gap-5 w-3/4 p-20'>
           
           {entries ? entries.map((entry) => (
             <Entry  props={entry} />
           )) : null}
+        </div>
+
         </div>
     </div>
   )

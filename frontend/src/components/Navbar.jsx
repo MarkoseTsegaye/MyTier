@@ -108,6 +108,7 @@ const Navbar = () => {
       const results = data.results;
       const gameInfo = results.map((result) => ({
         title: result.name || 'No name available',
+        developer: result.released,
         imageUrl: result.background_image || 'No image available',
         genre: result.genres[0]?.name || 'No genre available',
         type: "game"
@@ -138,10 +139,12 @@ const Navbar = () => {
           title: result.title || 'No name available',
           imageUrl: result.cover_i ? `https://covers.openlibrary.org/b/id/${result.cover_i}-M.jpg` : 'No image available',
           author: result.author_name?.[0] || 'No author available',
+          genre: result.subject[0],
           type: "book"
         }));
         
         setItems(bookInfo);
+        console.log(bookInfo)
         setLengthOfList(results.length)
 
       })
@@ -170,6 +173,7 @@ const Navbar = () => {
         const tvInfo = results.map((result) => ({
           title: result.Title || 'No name available',
           imageUrl: result.Poster || 'No image available',
+          format: result.type,
           type: "tv"
         }));
         

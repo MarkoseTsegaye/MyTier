@@ -8,14 +8,11 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { Add } from '@mui/icons-material';
 import { Button } from '@mui/material';
-import api from '.../api';
+import api from 'C:/Users/notmy/OneDrive/Documents/Fun Projects/MyTier/frontend/src/api';
 
 const SearchEntry = ({data, length}) => {
   const theme = useTheme();
-  const title = (data.title)
-  const author = (data.studio)
-  const picture = (data.imageUrl)
-  const type = (data.type)
+  
 
  
   
@@ -36,6 +33,7 @@ const SearchEntry = ({data, length}) => {
 
     info = {
       "title":data.title,
+      "genre":data.genre,
       "author":data.author,
       "image":data.imageUrl
     }
@@ -48,6 +46,7 @@ const SearchEntry = ({data, length}) => {
       "author":data.developer,
       "image":data.imageUrl,
       "genre":data.genre,
+    
 
     }
   }
@@ -57,11 +56,18 @@ const SearchEntry = ({data, length}) => {
     info = {
       "title":data.title,
       "image":data.imageUrl,
+      "author" : data.type
       
 
 
     }
   }
+
+  const title = (info.title)
+  const author = (info.author)
+  const picture = (info.image)
+  const type = (data.type)
+
   
 
   const addToCollection = (e) => {
