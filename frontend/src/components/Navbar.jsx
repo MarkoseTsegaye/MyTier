@@ -190,6 +190,11 @@ const Navbar = () => {
   
   return (
     <div className="w-screen bg-[#333333] flex h-20">
+      <div className='hidden sm:flex w-[10%] text-center items-center text-white'>
+        <img src='../assets/react.svg'></img>
+      <h1 className="flex justify-self-center mx-autotext-lg">MyTier</h1>
+        
+      </div>
       <div className="place-self-center ml-8 sm:ml-14 md:ml-20 lg:ml-30 xl:ml-40 h-1/2">
         <Box
           sx={{
