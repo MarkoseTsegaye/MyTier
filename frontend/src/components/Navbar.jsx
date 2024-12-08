@@ -4,7 +4,7 @@ import api from "../api";
 // #import API next
 
 import SearchEntry from './SearchItems/SearchEntry';
-const Navbar = () => {
+const Navbar = ({refresh}) => {
   const [searchItem, setSearchItem] = useState('');
   const [items, setItems] = useState([]);
   const [lengthOfList, setLengthOfList] = useState(0);
@@ -195,6 +195,8 @@ const Navbar = () => {
       <h1 className="flex justify-self-center mx-autotext-lg">MyTier</h1>
         
       </div>
+      <ClickAwayListener onClickAway={handleClickAway}>
+
       <div className="place-self-center ml-8 sm:ml-14 md:ml-20 lg:ml-30 xl:ml-40 h-1/2">
         <Box
           sx={{
@@ -246,7 +248,6 @@ const Navbar = () => {
                 </Select>
               </FormControl>
 
-          <div></div>
           <InputBase
             value={searchItem}
             onChange={handleInputChange}
@@ -291,16 +292,17 @@ const Navbar = () => {
           {focused ? (
     items.length > 0 ? (
         items.map((item, index) => 
-          <ClickAwayListener onClickAway={handleClickAway}>
 
-        <SearchEntry key={index} data={item} length={lengthOfList} />
-        </ClickAwayListener>)
+        <SearchEntry refresh={refresh} key={index} data={item} length={lengthOfList} />
+        )
     ) : (
-      <SearchEntry data={{title: "f", type:"anime"}} length={1} />
+      null
     )
 ) : null}
         </div>
       </div>
+      </ClickAwayListener>
+
     </div>
   );
 };

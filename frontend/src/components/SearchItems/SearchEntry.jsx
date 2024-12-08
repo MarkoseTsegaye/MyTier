@@ -10,7 +10,7 @@ import { Add } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import api from 'C:/Users/notmy/OneDrive/Documents/Fun Projects/MyTier/frontend/src/api';
 
-const SearchEntry = ({data, length}) => {
+const SearchEntry = ({data, length, refresh}) => {
   const theme = useTheme();
   
 
@@ -83,11 +83,13 @@ const SearchEntry = ({data, length}) => {
         console.log(data)
     })
     .catch((err) => alert(err));
+
+    refresh()
   }
   return (
     <div>
     {length > 0 ? 
-    <Card sx={{ display: 'flex',  width: {
+    <Card className="z-30" sx={{ display: 'flex',  width: {
               xs: '300px',  // 100% width on extra-small screens
               sm: '400px',   // 75% width on small screens
               md: '500px',   // 50% width on medium screens

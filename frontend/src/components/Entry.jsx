@@ -7,8 +7,8 @@ import Box from '@mui/material/Box';
 import { CalendarDays, Tag } from 'lucide-react'
 
 const Entry = ({ props }) => {
-  return (
-    <div className=" rounded-lg overflow-hidden shadow-2xl w-full h-[100%] bg-[#333333]">
+  return (    
+    <div className=" rounded-lg overflow-hidden shadow-2xl w-full h-min bg-[#333333]">
       <div className="relative w-full text-white h-48">
         <img
           src={props.picture  }
@@ -17,7 +17,7 @@ const Entry = ({ props }) => {
         />
       </div>
       <div className="px-6 py-4 bg-[#333333]">
-        <h2 className="font-bold text-xl mb-2 text-white">{props.title.length > 30 ? props.title.slice(0,29) + "...": props.title}</h2>
+        <h2 className="font-bold md:text-xl mb-2 text-white">{props.title.length > 30 ? props.title.slice(0,29) + "...": props.title}</h2>
         <div className="flex items-center text-white text-sm mb-2">
           <CalendarDays className="h-4 w-4 mr-2" />
           <span>{props.author}</span>
