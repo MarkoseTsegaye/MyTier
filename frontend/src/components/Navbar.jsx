@@ -139,7 +139,7 @@ const Navbar = ({refresh}) => {
           title: result.title || 'No name available',
           imageUrl: result.cover_i ? `https://covers.openlibrary.org/b/id/${result.cover_i}-M.jpg` : 'No image available',
           author: result.author_name?.[0] || 'No author available',
-          genre: result.subject[0],
+          genre: result.subject ? (result.subject[0] ? result.subject[0] : null): null,
           type: "book"
         }));
         
