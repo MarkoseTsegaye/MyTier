@@ -3,6 +3,8 @@ import Navbar from '../components/Navbar';
 import api from '../api';
 import Entry from '../components/Entry';
 import FilterBox from '../components/FilterBox';
+import HomeIcon from '@mui/icons-material/Home';
+
 
 const Collection = () => {
   const [entries, setEntries] = useState([]);
@@ -29,7 +31,14 @@ const Collection = () => {
     <div className='fixed top-0 -z-10 h-full w-full bg-[#1E1E1E] overflow-y-scroll'>
       <Navbar refresh={getItems} /> {/* Passing the getItems function */}
       <div className='w-full flex'>
-        <div className='w-1/5 bg-black'></div>
+        <div className='w-1/5 bg-black flex flex-col space-y-7 pt-7'>
+          <div className='w-full h-8 bg-[#333] text-white font-bold'>
+            {/* <HomeIcon /> Resume here */}
+            Home
+            </div>
+
+          <div className='w-full h-8 bg-[#333] text-white font-bold'>Collection</div>
+        </div>
         <div className='w-3/4'>
           <div>
             <FilterBox className="z-0" />

@@ -33,6 +33,7 @@ const FilterBox = () => {
         borderRadius: '3px', 
         width: '100%',
       }}>
+        <h1 className='text-2xl text-white'>Collection</h1>
       {/* Dark Mode Filter Box */}
       <Box sx={{ display: 'flex', alignItems: 'center', color: 'white' }}>
         <IconButton onClick={handleMenuOpen} sx={{ color: 'white' }}>
