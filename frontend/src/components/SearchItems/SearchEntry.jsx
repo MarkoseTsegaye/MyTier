@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { Add } from '@mui/icons-material';
 import { Button } from '@mui/material';
-import api from 'C:/Users/notmy/OneDrive/Documents/Fun Projects/MyTier/frontend/src/api';
+import api from '../../api';
 
 const SearchEntry = ({data, length, refresh}) => {
   const theme = useTheme();
@@ -87,15 +87,15 @@ const SearchEntry = ({data, length, refresh}) => {
     refresh()
   }
   return (
-    <div>
+    <div className='z-40 overflow-y-visible'>
     {length > 0 ? 
-    <Card className="z-30" sx={{ display: 'flex',  width: {
+    <Card className="z-50" sx={{ display: 'flex',  width: {
               xs: '300px',  // 100% width on extra-small screens
               sm: '400px',   // 75% width on small screens
               md: '500px',   // 50% width on medium screens
               lg: '600px',   // 40% width on large screens
               xl: '800px',   // 30% width on extra-large screens
-            } , borderRadius:0, borderBottom: '1px solid black', paddingLeft:.5, paddingBottom:.5, paddingTop:.5}}>
+            } , borderRadius:0, borderBottom: '1px solid black', paddingLeft:.5, paddingBottom:.5, paddingTop:.5, zIndex:'20'}}>
           <Box sx={{ display: 'flex', flexDirection: 'row' }}>
           <CardMedia
             component="img"

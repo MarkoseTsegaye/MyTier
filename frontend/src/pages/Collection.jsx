@@ -4,6 +4,9 @@ import api from '../api';
 import Entry from '../components/Entry';
 import FilterBox from '../components/FilterBox';
 import HomeIcon from '@mui/icons-material/Home';
+import FolderIcon from '@mui/icons-material/Folder';
+import ViewListIcon from '@mui/icons-material/ViewList';
+
 
 
 const Collection = () => {
@@ -28,16 +31,23 @@ const Collection = () => {
   }, []);
 
   return (
-    <div className='fixed top-0 -z-10 h-full w-full bg-[#1E1E1E] overflow-y-scroll'>
-      <Navbar refresh={getItems} /> {/* Passing the getItems function */}
-      <div className='w-full flex'>
-        <div className='w-1/5 bg-black flex flex-col space-y-7 pt-7'>
-          <div className='w-full h-8 bg-[#333] text-white font-bold'>
-            {/* <HomeIcon /> Resume here */}
+    <div className='fixed z-0 h-full w-full bg-[#1E1E1E] '>
+            <Navbar className=' z-50' refresh={getItems} /> {/* Passing the getItems function */}
+
+      <div className='w-full mt-20 flex'>
+        <div className='w-1/5 bg-black flex flex-col space-y-7 pt-7 font-bold rounded-md'>
+          <div className='w-[90%] h-8 bg-[#333] rounded-md text-white flex items-center'>
+            <HomeIcon className='mr-2'/> 
             Home
             </div>
 
-          <div className='w-full h-8 bg-[#333] text-white font-bold'>Collection</div>
+          <div className='w-[90%] h-8 bg-[#333] rounded-md text-white flex items-center'>
+          <FolderIcon className='mr-2'/> 
+          Collection</div>
+
+          <div className='w-[90%] h-8 bg-[#333] rounded-md text-white flex items-center'>
+          <ViewListIcon className='mr-2'/> 
+          Watch/Read List</div>
         </div>
         <div className='w-3/4'>
           <div>

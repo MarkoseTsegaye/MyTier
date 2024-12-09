@@ -32,6 +32,7 @@ const FilterBox = () => {
         height: '40px', 
         borderRadius: '3px', 
         width: '100%',
+        zIndex:'0'
       }}>
         <h1 className='text-2xl text-white'>Collection</h1>
       {/* Dark Mode Filter Box */}
@@ -72,7 +73,7 @@ const FilterBox = () => {
       <Menu
         anchorEl={anchorEl2}
         open={Boolean(anchorEl2)}
-        onClose={handleMenuClose}
+        onClose={handleMenuClose2}
         sx={{
           display: 'flex',
           flexDirection: 'row',

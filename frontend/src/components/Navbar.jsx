@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, Input, ClickAwayListener, Select, MenuItem, FormControl, InputBase } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 import api from "../api";
 // #import API next
 
@@ -189,120 +191,120 @@ const Navbar = ({refresh}) => {
   
   
   return (
-    <div className="w-screen bg-[#333333] flex h-20">
+    <div className="w-screen bg-[#333333] flex h-20 overflow-y-visible overflow-x-hidden">
       <div className='hidden sm:flex w-[10%] text-center items-center text-white'>
-        <img src='../assets/react.svg'></img>
-      <h1 className="flex justify-self-center mx-autotext-lg">MyTier</h1>
-        
-      </div>
-      <ClickAwayListener onClickAway={handleClickAway}>
+        <img src='/material-layout-stack-svgrepo-com.svg' width={48}></img>
+        <h1 className="flex justify-self-center mx-auto text-3xl font-bold">MyTier</h1>
+          
+        </div>
+        <ClickAwayListener onClickAway={handleClickAway}>
 
-      <div className="place-self-center ml-8 sm:ml-14 md:ml-20 lg:ml-30 xl:ml-40 h-1/2">
-        <Box
-          sx={{
-            width: {
-              xs: '310px',  // 100% width on extra-small screens
-              sm: '410px',   // 75% width on small screens
-              md: '510px',   // 50% width on medium screens
-              lg: '610px',   // 40% width on large screens
-              xl: '810px',   // 30% width on extra-large screens
-            },
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-            backgroundColor: '#f9f9f9',
-            boxShadow: 2,
-            
-          }}
-        >
-          <FormControl sx={{ width: {
-            xs:'60%',
-            sm:'70%',
-            md:'60%',
-            lg: '40%'
-            }, height: '100%' }}>
-            <Select
-              value={selection}
-              onChange={handleSelect}
-              sx={{
-                width: '100%',
-                height: '100%',
-                borderRadius: '0',
-                backgroundColor: '#ffffff',
-                '& .MuiOutlinedInput-notchedOutline': {
-                  border: 'none', // Removes the outline
-                },
-                '&:focus .MuiOutlinedInput-notchedOutline': {
-                  border: 'none', // Removes the outline when focused
-                },
-                '&:hover .MuiOutlinedInput-notchedOutline': {
-                  border: 'none', // Removes the outline on hover
-                },
-              }}
-            >
-                    <MenuItem sx={{borderRadius:0}} value={'anime'}>Anime</MenuItem>
-                    <MenuItem sx={{borderRadius:0}} value={'game'}>Game</MenuItem>
-                    <MenuItem sx={{borderRadius:0}} value={'tv'}>TV</MenuItem>
-                    <MenuItem sx={{borderRadius:0}} value={'book'}>Book</MenuItem>
-
-                </Select>
-              </FormControl>
-
-          <InputBase
-            value={searchItem}
-            onChange={handleInputChange}
-            placeholder="Search..."
+        <div className="place-self-center ml-8 sm:ml-14 md:ml-20 lg:ml-30 xl:ml-40 h-1/2">
+          <Box
             sx={{
               width: {
-                xs: '90%',  // 100% width on extra-small screens
-                sm: '95%',   // 75% width on small screens
-                md: '98%',   // 50% width on medium screens
-                lg: '100%',   // 40% width on large screens
-                xl: '100%',   // 30% width on extra-large screens
-              },              height: '100%',
-              padding: '10px',
-              border: '1px solid #ccc',
-              borderRadius: '0',
-              backgroundColor: '#ffffff',
+                xs: '310px',  // 100% width on extra-small screens
+                sm: '410px',   // 75% width on small screens
+                md: '510px',   // 50% width on medium screens
+                lg: '610px',   // 40% width on large screens
+                xl: '810px',   // 30% width on extra-large screens
+              },
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'row',
+              backgroundColor: '#f9f9f9',
+              boxShadow: 2,
+              
             }}
-          />
-          
-            <Button
-              variant="contained"
-              onClick={() => handleGet(searchItem)} 
+          >
+            <FormControl sx={{ width: {
+              xs:'60%',
+              sm:'70%',
+              md:'60%',
+              lg: '40%'
+              }, height: '100%' }}>
+              <Select
+                value={selection}
+                onChange={handleSelect}
+                sx={{
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '0',
+                  backgroundColor: '#ffffff',
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    border: 'none', // Removes the outline
+                  },
+                  '&:focus .MuiOutlinedInput-notchedOutline': {
+                    border: 'none', // Removes the outline when focused
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    border: 'none', // Removes the outline on hover
+                  },
+                }}
+              >
+                      <MenuItem sx={{borderRadius:0}} value={'anime'}>Anime</MenuItem>
+                      <MenuItem sx={{borderRadius:0}} value={'game'}>Game</MenuItem>
+                      <MenuItem sx={{borderRadius:0}} value={'tv'}>TV</MenuItem>
+                      <MenuItem sx={{borderRadius:0}} value={'book'}>Book</MenuItem>
+
+                  </Select>
+                </FormControl>
+
+            <InputBase
+              value={searchItem}
+              onChange={handleInputChange}
+              placeholder="Search..."
               sx={{
-                width: '20%',
-                height: '100%',
-                backgroundColor: '#007bff',
-                '&:hover': {
-                  backgroundColor: '#0056b3',
-                },
-                borderRadius: 0,
+                width: {
+                  xs: '90%',  // 100% width on extra-small screens
+                  sm: '95%',   // 75% width on small screens
+                  md: '98%',   // 50% width on medium screens
+                  lg: '100%',   // 40% width on large screens
+                  xl: '100%',   // 30% width on extra-large screens
+                },              height: '100%',
                 padding: '10px',
+                border: '1px solid #ccc',
+                borderRadius: '0',
+                backgroundColor: '#ffffff',
               }}
-            >
-              Search
-            </Button>
-        </Box>
+            />
+            
+              <Button
+                variant="contained"
+                onClick={() => handleGet(searchItem)} 
+                sx={{
+                  width: '20%',
+                  height: '100%',
+                  backgroundColor: '#007bff',
+                  '&:hover': {
+                    backgroundColor: '#0056b3',
+                  },
+                  borderRadius: 0,
+                  padding: '10px',
+                }}
+              >
+                Search
+              </Button>
+          </Box>
 
-        <div className="max-h-[300px] sm:max-h-[450px] lg:max-h-[550px] max-h-[600px] overflow-y-auto">
-          {/* {focused ? items.map((item) => (
-            <SearchEntry  data={item} length={lengthOfList} />
-          )) : null} */}
-          {focused ? (
-    items.length > 0 ? (
-        items.map((item, index) => 
+          <div className="max-h-[300px] sm:max-h-[450px] lg:max-h-[550px] max-h-[600px] overflow-y-auto">
+            {/* {focused ? items.map((item) => (
+              <SearchEntry  data={item} length={lengthOfList} />
+            )) : null} */}
+            {focused ? (
+      items.length > 0 ? (
+          items.map((item, index) => 
 
-        <SearchEntry refresh={refresh} key={index} data={item} length={lengthOfList} />
-        )
-    ) : (
-      null
-    )
-) : null}
+          <SearchEntry refresh={refresh} key={index} data={item} length={lengthOfList} />
+          )
+      ) : (
+        null
+      )
+  ) : null}
+          </div>
         </div>
-      </div>
-      </ClickAwayListener>
-
+        </ClickAwayListener>
+        <AccountCircleIcon className='mt-2 ml-auto mr-32' style={{ fontSize: 60, color:'#007bff' }}/>
     </div>
   );
 };
