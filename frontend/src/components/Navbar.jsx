@@ -191,7 +191,7 @@ const Navbar = ({refresh}) => {
   
   
   return (
-    <div className="w-screen bg-[#333333] flex h-20 overflow-y-visible overflow-x-hidden">
+    <div className="w-[90%] bg-[#333333] flex z-90 h-20 overflow-x-hidden">
       <div className='hidden sm:flex w-[10%] text-center items-center text-white'>
         <img src='/material-layout-stack-svgrepo-com.svg' width={48}></img>
         <h1 className="flex justify-self-center mx-auto text-3xl font-bold">MyTier</h1>

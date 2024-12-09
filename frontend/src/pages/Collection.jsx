@@ -31,11 +31,11 @@ const Collection = () => {
   }, []);
 
   return (
-    <div className='fixed z-0 h-full w-full bg-[#1E1E1E] '>
-            <Navbar className=' z-50' refresh={getItems} /> {/* Passing the getItems function */}
+    <div className='fixed h-full w-full overflow-y-scroll overflow-x-hidden bg-[#333] '>
+            <Navbar className='z-20 top-0 fixed' refresh={getItems} /> {/* Passing the getItems function */}
 
-      <div className='w-full mt-20 flex'>
-        <div className='w-1/5 bg-black flex flex-col space-y-7 pt-7 font-bold rounded-md'>
+      <div className='w-[90%] absolute z-0 bg-[#333] flex'>
+        <div className='w-1/5 bg-[#121212] flex flex-col space-y-7 pt-7 font-bold '>
           <div className='w-[90%] h-8 bg-[#333] rounded-md text-white flex items-center'>
             <HomeIcon className='mr-2'/> 
             Home

@@ -85,16 +85,18 @@ const SearchEntry = ({data, length, refresh}) => {
     .catch((err) => alert(err));
 
     refresh()
+    refresh()
+
   }
   return (
-    <div className='z-40 overflow-y-visible'>
+    <div className='z-40 fixed overflow-y-visible'>
     {length > 0 ? 
     <Card className="z-50" sx={{ display: 'flex',  width: {
-              xs: '300px',  // 100% width on extra-small screens
-              sm: '400px',   // 75% width on small screens
-              md: '500px',   // 50% width on medium screens
-              lg: '600px',   // 40% width on large screens
-              xl: '800px',   // 30% width on extra-large screens
+              xs: '310px',  // 100% width on extra-small screens
+              sm: '410px',   // 75% width on small screens
+              md: '510px',   // 50% width on medium screens
+              lg: '610px',   // 40% width on large screens
+              xl: '810px',   // 30% width on extra-large screens
             } , borderRadius:0, borderBottom: '1px solid black', paddingLeft:.5, paddingBottom:.5, paddingTop:.5, zIndex:'20'}}>
           <Box sx={{ display: 'flex', flexDirection: 'row' }}>
           <CardMedia

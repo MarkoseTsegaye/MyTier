@@ -27,11 +27,11 @@ const FilterBox = () => {
         display: 'flex', 
         justifyContent: 'space-evenly', 
         alignItems: 'center', 
-        backgroundColor: 'None', 
+        backgroundColor: '#1E1E1E', 
         padding: '8px', 
         height: '40px', 
-        borderRadius: '3px', 
-        width: '100%',
+        borderRadius: '0px', 
+        width: '95%',
         zIndex:'0'
       }}>
         <h1 className='text-2xl text-white'>Collection</h1>
