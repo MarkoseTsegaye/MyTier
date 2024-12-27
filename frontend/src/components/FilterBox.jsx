@@ -27,14 +27,14 @@ const FilterBox = () => {
         display: 'flex', 
         justifyContent: 'space-evenly', 
         alignItems: 'center', 
-        backgroundColor: '#1E1E1E', 
+        backgroundColor: '#121212', 
         padding: '8px', 
         height: '40px', 
         borderRadius: '0px', 
-        width: '95%',
+        width: '100%',
         zIndex:'0'
       }}>
-        <h1 className='text-2xl text-white'>Collection</h1>
+        <h1 className='text-2xl text-white'>Home</h1>
       {/* Dark Mode Filter Box */}
       <Box sx={{ display: 'flex', alignItems: 'center', color: 'white' }}>
         <IconButton onClick={handleMenuOpen} sx={{ color: 'white' }}>

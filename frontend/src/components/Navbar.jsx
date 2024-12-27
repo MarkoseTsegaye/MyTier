@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Box, Button, Input, ClickAwayListener, Select, MenuItem, FormControl, InputBase } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-
+import { Menu} from '@mui/material';
 import api from "../api";
 // #import API next
 
 import SearchEntry from './SearchItems/SearchEntry';
+import { Logout, Settings } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 const Navbar = ({refresh}) => {
   const [searchItem, setSearchItem] = useState('');
   const [items, setItems] = useState([]);
@@ -31,6 +33,15 @@ const Navbar = ({refresh}) => {
   };
   const handleSelect = (e) => {
     setSelection(e.target.value);
+  };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  
+  const openSettings = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const closeSettings = () => {
+    setAnchorEl(null);
   };
 
   const [focused, setFocused] = useState(false);
@@ -188,13 +199,17 @@ const Navbar = ({refresh}) => {
       });
   };
 ;
-  
+const navigate = useNavigate();
+
+  const logout = () => {
+    navigate("/logout");
+  }
   
   return (
-    <div className="w-[90%] bg-[#333333] flex z-90 h-20 overflow-x-hidden">
+    <div className="w-full bg-[#333333] flex z-90  h-20 overflow-hidden">
       <div className='hidden sm:flex w-[10%] text-center items-center text-white'>
-        <img src='/material-layout-stack-svgrepo-com.svg' width={48}></img>
-        <h1 className="flex justify-self-center mx-auto text-3xl font-bold">MyTier</h1>
+        <img className='hidden sm:flex' src='/material-layout-stack-svgrepo-com.svg' width={48}></img>
+        <h1 className="hidden md:flex flex justify-self-center mx-auto text-3xl font-bold">MyTier</h1>
           
         </div>
         <ClickAwayListener onClickAway={handleClickAway}>
@@ -287,7 +302,7 @@ const Navbar = ({refresh}) => {
               </Button>
           </Box>
 
-          <div className="max-h-[300px] sm:max-h-[450px] lg:max-h-[550px] max-h-[600px] overflow-y-auto">
+          <div className="max-h-[300px] z-50 absolute sm:max-h-[450px] lg:max-h-[550px] max-h-[600px] overflow-y-auto">
             {/* {focused ? items.map((item) => (
               <SearchEntry  data={item} length={lengthOfList} />
             )) : null} */}
@@ -304,7 +319,37 @@ const Navbar = ({refresh}) => {
           </div>
         </div>
         </ClickAwayListener>
-        <AccountCircleIcon className='mt-2 ml-auto mr-32' style={{ fontSize: 60, color:'#007bff' }}/>
+        <Box sx={{ display: 'flex', alignItems: 'center', color: '#333', marginLeft:'auto' }}>
+        
+        <AccountCircleIcon className='mr-32 hover:bg-gray-600' 
+        style={{ fontSize: 60, color:'#007bff' }}
+        onClick={openSettings}/>
+
+      </Box>
+      <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={closeSettings}
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                backgroundColor: 'None',
+                color: '#333',
+              }}
+              className='text-center'
+            >
+              <MenuItem onClick={closeSettings}>
+              <AccountCircleIcon/>    Profile</MenuItem>
+              <MenuItem onClick={closeSettings}>
+              <Settings/>Settings</MenuItem>
+
+              <MenuItem onClick={logout}>
+                <Logout/> Logout
+              </MenuItem>
+
+              
+      
+            </Menu>
     </div>
   );
 };
