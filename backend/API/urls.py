@@ -6,7 +6,7 @@ from . import views
 
 # Include the router URLs
 urlpatterns = [
-    path('entry/', views.AddEntry.as_view(), name='entry-list'),
+    path('entry/<str:media>', views.AddEntry.as_view(), name='entry-list'),
     path('entry/delete/<int:pk>', views.EntryDelete.as_view(), name='delete-entry'),
 
 ]

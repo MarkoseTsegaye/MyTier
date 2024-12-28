@@ -2,8 +2,11 @@ import React from 'react';
 import { CalendarDays, Tag } from 'lucide-react';
 import CloseIcon from '@mui/icons-material/Close';
 import api from '../api';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Entry = ({ props, refresh }) => {
+    const { media } = useParams(); // Get the media parameter from the URL
+  
   const removeFromCollection = (e, id) => {
     e.stopPropagation(); // Prevents the event from bubbling up
 
@@ -15,10 +18,10 @@ const Entry = ({ props, refresh }) => {
       })
       .catch((err) => alert(err));
 
-    refresh();
-    refresh();
-    refresh();
-    refresh();
+      refresh(media)
+      refresh(media)
+      refresh(media)
+      refresh(media)
   };
   const getSvgPath = (type) => {
     switch (type) {

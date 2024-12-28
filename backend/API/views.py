@@ -17,7 +17,20 @@ class AddEntry(generics.ListCreateAPIView):
 
     def get_queryset(self):
         user= self.request.user
-        return Entry.objects.filter(user=user)
+        media = self.kwargs['media']
+
+        
+        if media == 'tv':
+            return Entry.objects.filter(user=user, type='tv')
+        elif media == 'game':
+            return Entry.objects.filter(user=user, type='game')
+        elif media == 'book':
+            return Entry.objects.filter(user=user, type='book')
+        elif media == 'anime':
+            return Entry.objects.filter(user=user, type='anime')
+        else:
+            return Entry.objects.filter(user=user)
+
     
     def perform_create(self,serializer):
         if serializer.is_valid():

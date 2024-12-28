@@ -43,6 +43,10 @@ const Navbar = ({refresh}) => {
   const closeSettings = () => {
     setAnchorEl(null);
   };
+  const goToSettings  = (event) => {
+    closeSettings();
+    navigate("/settings");
+  }
 
   const [focused, setFocused] = useState(false);
   const handleClickIn = () => {
@@ -206,7 +210,9 @@ const navigate = useNavigate();
   }
   
   return (
+    
     <div className="w-full bg-[#333333] flex z-90  h-20 overflow-hidden">
+
       <div className='hidden sm:flex w-[10%] text-center items-center text-white'>
         <img className='hidden sm:flex' src='/material-layout-stack-svgrepo-com.svg' width={48}></img>
         <h1 className="hidden md:flex flex justify-self-center mx-auto text-3xl font-bold">MyTier</h1>
@@ -338,9 +344,8 @@ const navigate = useNavigate();
               }}
               className='text-center'
             >
-              <MenuItem onClick={closeSettings}>
-              <AccountCircleIcon/>    Profile</MenuItem>
-              <MenuItem onClick={closeSettings}>
+              
+              <MenuItem onClick={goToSettings}>
               <Settings/>Settings</MenuItem>
 
               <MenuItem onClick={logout}>

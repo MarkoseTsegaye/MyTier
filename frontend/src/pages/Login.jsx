@@ -23,7 +23,7 @@ function Login({ route, method }) {
             
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
                 localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-                navigate("/collection")
+                navigate("/collection/all")
                 
             
         } catch (error) {

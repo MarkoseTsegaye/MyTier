@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import { Box, Button, Menu, MenuItem, IconButton } from '@mui/material';
 import { FilterList } from '@mui/icons-material';
+import { useParams } from 'react-router-dom';
 
 const FilterBox = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEl2, setAnchorEl2] = useState(null);
+  const { media } = useParams(); // Get the media parameter from the URL
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+  const capitalizedMedia = capitalizeFirstLetter(media);
+
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -34,7 +41,7 @@ const FilterBox = () => {
         width: '100%',
         zIndex:'0'
       }}>
-        <h1 className='text-2xl text-white'>Home</h1>
+        <h1 className='text-2xl text-white'>{capitalizedMedia}</h1>
       {/* Dark Mode Filter Box */}
       <Box sx={{ display: 'flex', alignItems: 'center', color: 'white' }}>
         <IconButton onClick={handleMenuOpen} sx={{ color: 'white' }}>
@@ -62,33 +69,10 @@ const FilterBox = () => {
 
       </Menu>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', color: 'white' }}>
-        <IconButton onClick={handleMenuOpen2} sx={{ color: 'white' }}>
-          <FilterList />
-        </IconButton>
-        <span style={{ marginLeft: '8px' }}>Showing</span>
-      </Box>
+      
 
       {/* Filter Menu (Horizontal Menu) */}
-      <Menu
-        anchorEl={anchorEl2}
-        open={Boolean(anchorEl2)}
-        onClose={handleMenuClose2}
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          backgroundColor: 'None',
-          color: 'white',
-        }}
-      >
-        <MenuItem onClick={handleMenuClose2}>All</MenuItem>
-        <MenuItem onClick={handleMenuClose2}>Anime</MenuItem>
-        <MenuItem onClick={handleMenuClose2}>Video Game</MenuItem>
-        <MenuItem onClick={handleMenuClose2}>Books</MenuItem>
-        <MenuItem onClick={handleMenuClose2}>TV</MenuItem>
-
-
-      </Menu>
+      
     </Box>
   );
 };

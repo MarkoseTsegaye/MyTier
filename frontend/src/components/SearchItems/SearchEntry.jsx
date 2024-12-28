@@ -11,10 +11,12 @@ import { Button } from '@mui/material';
 import api from '../../api';
 import Snackbar from "@mui/material/Snackbar";
 import CloseIcon from '@mui/icons-material/Close';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const SearchEntry = ({data, length, refresh}) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const { media } = useParams(); // Get the media parameter from the URL
 
 
  
@@ -79,8 +81,8 @@ const SearchEntry = ({data, length, refresh}) => {
     handleCLick()
     console.log(title + author + picture + type)
 
-
-    api.post("/api/entry/", {title,picture,author,type})
+    const url = "/api/entry/"+ type
+    api.post(url, {title,picture,author,type})
     .then((res) => res.data)
     .then((data) => {
         // Map the data and set it to the options state
@@ -88,8 +90,10 @@ const SearchEntry = ({data, length, refresh}) => {
     })
     .catch((err) => alert(err));
 
-    refresh()
-    refresh()
+    refresh(media)
+    refresh(media)
+    refresh(media)
+    refresh(media)
     
   }
   const handleCLick = () => {

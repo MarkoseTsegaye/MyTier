@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute"
 import Home from "./pages/Home"
 import Landing from "./pages/Landing"
 import Collection from "./pages/Collection"
+import Settings from "./pages/Settings";
 
 
 function Logout() {
@@ -22,7 +23,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/collection" element={
+      <Route path="/collection/:media" element={
                     <ProtectedRoute>
 <Collection />
 </ProtectedRoute>
@@ -38,7 +39,12 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/settings" element={ 
+                      <ProtectedRoute>
 
+          <Settings />
+          </ProtectedRoute>
+} />
       </Routes>
     </BrowserRouter>
   )

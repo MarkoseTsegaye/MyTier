@@ -11,7 +11,7 @@ const Home = () => {
   }, []);
 
     const getEntries = () => {
-        api.get("/api/entry/")
+        api.get("/api/entry/3")
             .then((res) => res.data)
             .then((data) => {
                 // Map the data and set it to the options state
