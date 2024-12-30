@@ -7,7 +7,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Entry(models.Model):
     TYPE_CHOICES = [
-        ('movie', 'Movie'),
+        ('tv', 'Tv'),
         ('book', 'Book'),
         ('game', 'Game'),
         ('anime', 'Anime')
@@ -15,7 +15,7 @@ class Entry(models.Model):
     title = models.CharField(max_length=100)
     picture = models.CharField(max_length=2000)
     author = models.CharField(max_length=40)
-    type = models.CharField(choices=TYPE_CHOICES, max_length=100, default="MOVIE")
+    type = models.CharField(choices=TYPE_CHOICES, max_length=100, default="Tv")
     #rank = models.IntegerField(default=None, blank=True)
     user = models.ForeignKey(User, blank=True, on_delete=models.CASCADE)
     def __str__(self):

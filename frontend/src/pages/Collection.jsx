@@ -44,7 +44,7 @@ const Collection = () => {
           <div>
             <FilterBox className="z-0" />
           </div>
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 grid-rows-auto overflow-y-auto gap-3 h-screen md:gap-3 xl:gap-4 w-full p-10'>
+          <div className='grid pb-40 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 grid-rows-auto overflow-y-auto gap-3 h-screen md:gap-3 xl:gap-4 w-full p-10'>
             {/* Ensure the entries are rendered properly with a key */}
             {entries.length > 0 ? (
               entries.map((entry) => (

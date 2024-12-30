@@ -7,7 +7,7 @@ const Sidebar = () => {
       const navigate = useNavigate();
     
   return (
-    <Stack className='w-[30%] lg:w-1/5 overflow-y-auto bg-[#121212] flex flex-col space-y-7 pt-10 font-bold  h-screen  text-white'spacing={6}>
+    <Stack className='w-[40%] lg:w-1/5 overflow-y-auto bg-[#121212] flex flex-col space-y-7 pt-10 font-bold  h-screen sticky text-white'spacing={6}>
         <SimpleTreeView className=' text-2xl '>
 
             <TreeItem onClick={()=>navigate('/collection/all')} className='bg-[#333] p-4 ' itemId="home" label="Home"/>

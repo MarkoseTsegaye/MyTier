@@ -31,16 +31,16 @@ const navigate = useNavigate();
     
     <div className="w-full bg-[#333333] flex z-90  h-20 overflow-hidden">
 
-      <div className='hidden sm:flex w-[10%] text-center items-center ml-auto text-white'>
-        <img className='hidden sm:flex' src='/material-layout-stack-svgrepo-com.svg' width={48}></img>
-        <h1 className="hidden md:flex flex justify-self-center mx-auto text-3xl font-bold">MyTier</h1>
+      <div className=' flex w-[10%] text-center items-center sm:ml-auto text-white'>
+        <img  src='/material-layout-stack-svgrepo-com.svg' width={48}></img>
+        <h1 className=" flex justify-self-center mx-auto text-3xl font-bold">MyTier</h1>
           
         </div>
         
          
         <Box sx={{ display: 'flex', alignItems: 'center', color: '#333', marginLeft:'auto' }}>
-        
-        <AccountCircleIcon className='mr-32 hover:bg-gray-600' 
+        <h1 className='ml-auto text-white text-2xl mr-6'>Roddy</h1>
+        <AccountCircleIcon className='ml-auto mr-10 hover:bg-gray-600' 
         style={{ fontSize: 60, color:'#007bff' }}
         onClick={openSettings}/>
 

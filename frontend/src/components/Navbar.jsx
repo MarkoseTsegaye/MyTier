@@ -190,7 +190,7 @@ const Navbar = ({refresh}) => {
         const tvInfo = results.map((result) => ({
           title: result.Title || 'No name available',
           imageUrl: result.Poster || 'No image available',
-          format: result.type,
+          genre: result.Type,
           type: "tv"
         }));
         
@@ -326,9 +326,9 @@ const navigate = useNavigate();
         </div>
         </ClickAwayListener>
         <Box sx={{ display: 'flex', alignItems: 'center', color: '#333', marginLeft:'auto' }}>
-        
-        <AccountCircleIcon className='mr-32 hover:bg-gray-600' 
-        style={{ fontSize: 60, color:'#007bff' }}
+        <h1 className='hidden sm:flex ml-auto text-white text-2xl mr-2'>Roddy</h1>
+        <AccountCircleIcon className='ml-auto mr-10 hover:bg-gray-600' 
+        style={{ fontSize: 40, color:'#007bff' }}
         onClick={openSettings}/>
 
       </Box>

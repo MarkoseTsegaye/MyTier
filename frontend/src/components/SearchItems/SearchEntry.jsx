@@ -61,7 +61,8 @@ const SearchEntry = ({data, length, refresh}) => {
     info = {
       "title":data.title,
       "image":data.imageUrl,
-      "author" : data.type
+      "author" : data.genre,
+      
       
 
 
@@ -73,13 +74,13 @@ const SearchEntry = ({data, length, refresh}) => {
   const picture = (info.image)
   const type = (data.type)
 
-  
+ 
 
   const addToCollection = (e) => {
     
     e.preventDefault();
     handleCLick()
-    console.log(title + author + picture + type)
+    console.log(title + author  + type)
 
     const url = "/api/entry/"+ type
     api.post(url, {title,picture,author,type})
