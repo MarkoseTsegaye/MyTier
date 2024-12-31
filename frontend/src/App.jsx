@@ -7,6 +7,10 @@ import Home from "./pages/Home"
 import Landing from "./pages/Landing"
 import Collection from "./pages/Collection"
 import Settings from "./pages/Settings";
+import { AuthProvider } from "./pages/AuthContext";
+import Ranking from "./pages/Ranking";
+import { EntriesContext } from "./context/EntriesContext";
+import { CollectionsProvider } from "./context/CollectionsProvider";
 
 
 function Logout() {
@@ -14,13 +18,13 @@ function Logout() {
   return <Navigate to="/login" />
 }
 
-function RegisterAndLogout() {
-  localStorage.clear()
-  return <Register />
-}
+
 
 function App() {
   return (
+    <CollectionsProvider>
+
+    <AuthProvider >
     <BrowserRouter>
       <Routes>
       <Route path="/collection/:media" element={
@@ -37,6 +41,14 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/ranking/:media"
+          element={
+            <ProtectedRoute>
+              <Ranking />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/settings" element={ 
@@ -47,6 +59,9 @@ function App() {
 } />
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
+    </CollectionsProvider>
+
   )
 }
 

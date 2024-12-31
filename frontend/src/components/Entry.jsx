@@ -1,12 +1,13 @@
-import React from 'react';
+import {React, useContext} from 'react';
 import { CalendarDays, Tag } from 'lucide-react';
 import CloseIcon from '@mui/icons-material/Close';
 import api from '../api';
 import { useNavigate, useParams } from 'react-router-dom';
-
-const Entry = ({ props, refresh }) => {
+import { CollectionsContext } from '../context/CollectionsProvider';
+const Entry = ({ props }) => {
     const { media } = useParams(); // Get the media parameter from the URL
-  
+    const { getCollections } = useContext(CollectionsContext); // Use the context
+    {console.log(props)}
   const removeFromCollection = (e, id) => {
     e.stopPropagation(); // Prevents the event from bubbling up
 
@@ -18,10 +19,7 @@ const Entry = ({ props, refresh }) => {
       })
       .catch((err) => alert(err));
 
-      refresh(media)
-      refresh(media)
-      refresh(media)
-      refresh(media)
+      getCollections(media); // Refresh the collection
   };
   const getSvgPath = (type) => {
     switch (type) {
@@ -37,6 +35,7 @@ const Entry = ({ props, refresh }) => {
   };
   
   return (
+    
     <div className="relative rounded-2xl shadow-2xl w-full h-min bg-[#333333]">
       <div className="absolute top-0 right-0 bg-blue-500 text-white text-xs px-2 py-1 rounded-bl-lg">
         {props.id}

@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Navbar2 from '../components/Navbar2';
 import Sidebar from '../components/Sidebar';
-import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
-import { TreeItem } from '@mui/x-tree-view/TreeItem';
-import { Stack } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+
 const Settings = () => {
   const [activeSection, setActiveSection] = useState('');
-  const [activeSection2, setActiveSection2] = useState('');
-
-
+  const [activeSubSection, setActiveSubSection] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,50 +18,95 @@ const Settings = () => {
   const accountSection = () => {
     return (
       <div className='flex flex-col w-full text-white text-2xl'>
-        <h1 className='self-center justify-center'>Account</h1>
+        <h1 className='self-center justify-center mb-4'>Account</h1>
         <div>
-          <div onClick={() => setActiveSection2('password')} className='flex flex-col  w-full p-5  text-white text-2xl hover:bg-[#333333]'>
-              Change Password
-            </div>
-            <div onClick={() => setActiveSection2('username')} className='flex flex-col   w-full p-5  text-white text-2xl hover:bg-[#333333]'>
-              Change Username
-            </div>
-            <div onClick={() => setActiveSection2('picture')} className='flex flex-col   w-full p-5  text-white text-2xl hover:bg-[#333333]'>
-              Change Profile Picture
-            </div>
+          <div onClick={() => setActiveSubSection('password')} className='flex flex-col w-full p-5 text-white text-2xl hover:bg-[#444444] cursor-pointer'>
+            Change Password
+          </div>
+          <div onClick={() => setActiveSubSection('username')} className='flex flex-col w-full p-5 text-white text-2xl hover:bg-[#444444] cursor-pointer'>
+            Change Username
+          </div>
+          <div onClick={() => setActiveSubSection('picture')} className='flex flex-col w-full p-5 text-white text-2xl hover:bg-[#444444] cursor-pointer'>
+            Change Profile Picture
+          </div>
         </div>
       </div>
     );
-  }
+  };
+
   const helpSection = () => {
     return (
-      <div className='flex flex-col items-center justify-center text-white text-2xl hover:bg-[#333333]'>
+      <div className='flex flex-col items-center justify-center text-white text-2xl hover:bg-[#444444] cursor-pointer'>
         Help
       </div>
     );
-  }
+  };
+
+  const renderSubSectionContent = () => {
+    switch (activeSubSection) {
+      case 'password':
+        return (
+          <div className='text-white p-4'>
+            <h2 className='text-2xl mb-4'>Change Password</h2>
+            <form onSubmit={handleSubmit}>
+              <input type='password' placeholder='Current Password' className='w-full p-2 mb-4 bg-gray-700 border border-gray-600 rounded-md text-white' />
+              <input type='password' placeholder='New Password' className='w-full p-2 mb-4 bg-gray-700 border border-gray-600 rounded-md text-white' />
+              <input type='password' placeholder='Confirm New Password' className='w-full p-2 mb-4 bg-gray-700 border border-gray-600 rounded-md text-white' />
+              <button type='submit' className='w-full p-2 bg-blue-500 hover:bg-blue-600 rounded-md text-white'>Submit</button>
+            </form>
+          </div>
+        );
+      case 'username':
+        return (
+          <div className='text-white p-4'>
+            <h2 className='text-2xl mb-4'>Change Username</h2>
+            <form onSubmit={handleSubmit}>
+              <input type='text' placeholder='New Username' className='w-full p-2 mb-4 bg-gray-700 border border-gray-600 rounded-md text-white' />
+              <button type='submit' className='w-full p-2 bg-blue-500 hover:bg-blue-600 rounded-md text-white'>Submit</button>
+            </form>
+          </div>
+        );
+      case 'picture':
+        return (
+          <div className='text-white p-4'>
+            <h2 className='text-2xl mb-4'>Change Profile Picture</h2>
+            <form onSubmit={handleSubmit}>
+              <input type='file' className='w-full p-2 mb-4 bg-gray-700 border border-gray-600 rounded-md text-white' />
+              <button type='submit' className='w-full p-2 bg-blue-500 hover:bg-blue-600 rounded-md text-white'>Submit</button>
+            </form>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const handleSectionClick = (section) => {
+    setActiveSection(section);
+    setActiveSubSection(''); // Reset the sub-section when a new main section is selected
+  };
 
   return (
     <div className='fixed h-full w-full overflow-y-auto bg-gradient-to-b from-neutral-900 via-stone-900 to-zinc-800'>
       <Navbar2 />
-      <div className='flex w-full bg-white'>
+      <div className='flex w-full'>
         <Sidebar />
-        <div className='w-1/5  bg-[#555555] border-r-2 space-y-2 [&_:is(div)]:p-4 flex flex-col border-[#333333] '>
-            <div onClick={() => setActiveSection('account')} className='flex flex-col items-center justify-center text-white text-2xl hover:bg-[#333333]'>
-              Account
-            </div>
-            <div onClick={() => setActiveSection('help')} className='flex flex-col items-center justify-center text-white text-2xl hover:bg-[#333333]'>
-              Help
-            </div>
-            <div onClick={() => setActiveSection('logout')} className='flex flex-col items-center justify-center text-white text-2xl hover:bg-[#333333]'>
-              Logout
-            </div> 
+        <div className='w-1/5 bg-[#555555] border-r-2 space-y-2 flex flex-col border-[#333333] p-4'>
+          <div onClick={() => handleSectionClick('account')} className='flex flex-col items-center justify-center text-white text-2xl hover:bg-[#12121] cursor-pointer p-4 rounded-md'>
+            Account
+          </div>
+          <div onClick={() => handleSectionClick('help')} className='flex flex-col items-center justify-center text-white text-2xl hover:bg-[#444444] cursor-pointer p-4 rounded-md'>
+            Help
+          </div>
+          <div onClick={() => handleSectionClick('logout')} className='flex flex-col items-center justify-center text-white text-2xl hover:bg-[#444444] cursor-pointer p-4 rounded-md'>
+            Logout
+          </div>
         </div>
-        <div className='w-2/5 h-full bg-[#555555]'>
-        {activeSection === 'account' ? accountSection() : activeSection==="help" ? helpSection() : null}
+        <div className='w-2/5 h-full bg-[#555555] p-4'>
+          {activeSection === 'account' ? accountSection() : activeSection === 'help' ? helpSection() : null}
         </div>
-        <div className='w-4/5 h-full bg-green-200'>
-        {activeSection2 === 'picture' ? accountSection() : activeSection2==="password" ? helpSection() : null}
+        <div className='w-2/5 h-full bg-[#333333] p-4'>
+          {renderSubSectionContent()}
         </div>
       </div>
     </div>

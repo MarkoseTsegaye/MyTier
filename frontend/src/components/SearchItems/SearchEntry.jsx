@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -12,11 +12,13 @@ import api from '../../api';
 import Snackbar from "@mui/material/Snackbar";
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import { EntriesContext } from '../../context/EntriesContext';
+import { CollectionsContext } from '../../context/CollectionsProvider';
 const SearchEntry = ({data, length, refresh}) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const { media } = useParams(); // Get the media parameter from the URL
+  const { getCollections } = useContext(CollectionsContext); // Use the context
 
 
  
@@ -77,26 +79,32 @@ const SearchEntry = ({data, length, refresh}) => {
  
 
   const addToCollection = (e) => {
-    
     e.preventDefault();
-    handleCLick()
-    console.log(title + author  + type)
+    handleCLick();
+    console.log(title + author + type);
 
-    const url = "/api/entry/"+ type
-    api.post(url, {title,picture,author,type})
-    .then((res) => res.data)
-    .then((data) => {
-        // Map the data and set it to the options state
-        console.log(data)
-    })
-    .catch((err) => alert(err));
+    const url = "/api/entry/" + type;
+    
+    // Check if the title already exists
+    api.get(url, { params: { title } })
+      .then((res) => {
+        if (res.data.exists) {
+          alert("An entry with this title already exists in the database.");
+        } else {
+          // If not exists, add the new entry
+          api.post(url, { title, picture, author, type })
+            .then((res) => res.data)
+            .then((data) => {
+              getCollections(type); // Call getCollections to refresh the collections
+            })
+            .catch((err) => alert(err));
+        }
+      })
+      .catch((err) => alert(err));
 
-    refresh(media)
-    refresh(media)
-    refresh(media)
-    refresh(media)
     
   }
+
   const handleCLick = () => {
       setOpen(true);
     };
@@ -168,7 +176,7 @@ const SearchEntry = ({data, length, refresh}) => {
             <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
             <Button
               variant="contained"
-              sx={{ backgroundColor: '#007bff', '&:hover': { backgroundColor: '#0056b3' }, justifyContent: 'center'}}
+              sx={{ backgroundColor: '#f0731a', '&:hover': { backgroundColor: '#0056b3' }, justifyContent: 'center'}}
     onClick={addToCollection}>
   Add
     </Button>

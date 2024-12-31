@@ -4,6 +4,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Menu} from '@mui/material';
 import api from "../api";
 // #import API next
+import { useAuth } from '../pages/AuthContext';
 
 import SearchEntry from './SearchItems/SearchEntry';
 import { Logout, Settings } from '@mui/icons-material';
@@ -12,7 +13,8 @@ const Navbar2 = ({refresh}) => {
   
 
   const [anchorEl, setAnchorEl] = useState(null);
-  
+  const { user } = useAuth();
+
   const openSettings = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -39,7 +41,8 @@ const navigate = useNavigate();
         
          
         <Box sx={{ display: 'flex', alignItems: 'center', color: '#333', marginLeft:'auto' }}>
-        <h1 className='ml-auto text-white text-2xl mr-6'>Roddy</h1>
+        {user ? 
+        <h1 className='ml-auto text-white text-2xl mr-6'>{user.username}</h1>: null }
         <AccountCircleIcon className='ml-auto mr-10 hover:bg-gray-600' 
         style={{ fontSize: 60, color:'#007bff' }}
         onClick={openSettings}/>

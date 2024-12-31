@@ -4,6 +4,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Menu} from '@mui/material';
 import api from "../api";
 // #import API next
+import { useAuth } from '../pages/AuthContext';
 
 import SearchEntry from './SearchItems/SearchEntry';
 import { Logout, Settings } from '@mui/icons-material';
@@ -13,6 +14,7 @@ const Navbar = ({refresh}) => {
   const [items, setItems] = useState([]);
   const [lengthOfList, setLengthOfList] = useState(0);
   let debounceTimeout; 
+  const { user } = useAuth();
 
   const [selection, setSelection] = useState('anime');
 
@@ -296,9 +298,9 @@ const navigate = useNavigate();
                 sx={{
                   width: '20%',
                   height: '100%',
-                  backgroundColor: '#007bff',
+                  backgroundColor: '#f0731a',
                   '&:hover': {
-                    backgroundColor: '#0056b3',
+                    backgroundColor: '#f0571a',
                   },
                   borderRadius: 0,
                   padding: '10px',
@@ -326,7 +328,8 @@ const navigate = useNavigate();
         </div>
         </ClickAwayListener>
         <Box sx={{ display: 'flex', alignItems: 'center', color: '#333', marginLeft:'auto' }}>
-        <h1 className='hidden sm:flex ml-auto text-white text-2xl mr-2'>Roddy</h1>
+        {user ? 
+        <h1 className='ml-auto text-white text-2xl mr-6'>{user.username}</h1>: null }
         <AccountCircleIcon className='ml-auto mr-10 hover:bg-gray-600' 
         style={{ fontSize: 40, color:'#007bff' }}
         onClick={openSettings}/>
